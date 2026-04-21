@@ -8,11 +8,6 @@ yarn.lock
 .env.local
 .env.*.local
 
-# Generated files
-outputs/
-*.md
-podcast-*.md
-
 # Logs
 logs/
 *.log
