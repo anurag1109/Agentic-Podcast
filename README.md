@@ -1,4 +1,4 @@
-# Agentic Podcast Node Gemini
+# Agentic Podcast System
 
 An AI-powered podcast episode generator that automates the complete workflow from topic research to final script production using multi-agent orchestration and Google's Gemini API.
 
@@ -148,10 +148,6 @@ Each agent receives outputs from previous stages for context and continuity.
 - **AI Engine:** Google Generative AI SDK (v0.24.1)
 - **Environment:** dotenv (v16.4.5)
 - **Development:** nodemon (v3.1.0)
-
-## 📄 License
-
-MIT
 
 ## 👤 Author
 
