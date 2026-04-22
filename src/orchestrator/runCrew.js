@@ -19,29 +19,34 @@ async function runCrew(topic) {
   memory.logs.push("draft done");
   memory.finalScript = await editor.run({ draft: memory.draft });
   memory.logs.push("edit done");
-  memory.review = await critic.run({ script: memory.finalScript });
-  memory.logs.push("review done");
+  // memory.review = await critic.run({ script: memory.finalScript });
+  // memory.logs.push("review done");
   const out = "outputs";
   if (!fs.existsSync(out)) fs.mkdirSync(out);
-  const file = path.join(out, `podcast-${Date.now()}.md`);
+  const file = path.join(out, `${topic}.md`);
   const content = `**How I proceed**
 
 **1. Research:**
 ${memory.research}
 
+-------------
+
 **2. Plan:**
 ${memory.plan}
+
+-------------
 
 **3. Draft/Write:**
 ${memory.draft}
 
+-------------
+
 **4. Edit/Finalize:**
 ${memory.finalScript}
 
-**5. Review:**
-${memory.review}
-
------
+-------------
+-------------
+-------------
 
 **My Final Script:**
 ${memory.finalScript}`;
@@ -54,7 +59,7 @@ ${memory.finalScript}`;
     logs: memory.logs,
     research: memory.research,
     outline: memory.plan,
-    review: memory.review,
+    // review: memory.review,
     script: memory.finalScript,
   };
 }

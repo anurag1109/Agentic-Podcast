@@ -68,7 +68,7 @@ The server will start on `http://localhost:5000`
 
 **Endpoint:** `POST /api/podcast/generate`
 
-**Request Body:**
+**Request Body - Option 1: Generate from Topic**
 
 ```json
 {
@@ -76,18 +76,58 @@ The server will start on `http://localhost:5000`
 }
 ```
 
+**Request Body - Option 2: Convert Existing File to Audio** (bypass runCrew)
+
+```json
+{
+  "filename": "podcast-1776793139286.md"
+}
+```
+
 **Response:**
 
-- Orchestrates all 5 agents through the workflow
-- Returns the final podcast script as markdown
-- Saves output to `outputs/` folder with timestamp
+- Orchestrates all 5 agents through the workflow (if using topic)
+- OR reads existing script from outputs folder (if using filename)
+- Generates audio narration using Gemini Voice
+- Returns the podcast script + audio file
 
-**Example:**
+**Examples:**
+
+Generate new podcast from topic:
 
 ```bash
 curl -X POST http://localhost:5000/api/podcast/generate \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI"}'
+```
+
+Convert existing podcast file to audio (skip generation):
+
+```bash
+curl -X POST http://localhost:5000/api/podcast/generate \
+  -H "Content-Type: application/json" \
+  -d '{"filename": "podcast-1776793139286.md"}'
+```
+
+### List Available Podcast Files
+
+**Endpoint:** `GET /api/podcast/files`
+
+Returns all `.md` podcast files available in the `outputs/` folder for quick audio conversion.
+
+**Example:**
+
+```bash
+curl http://localhost:5000/api/podcast/files
+```
+
+**Response:**
+
+```json
+{
+  "available_files": ["podcast-1776793139286.md", "podcast-1776802121934.md"],
+  "count": 2
+}
 ```
 
 ### Health Check
